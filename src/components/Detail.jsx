@@ -18,7 +18,7 @@ export default function Detail() {
       isFavorite: !prevState.isFavorite
     }));
   }
-  
+
   return (
     <>
     {stock &&(
