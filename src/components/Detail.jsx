@@ -10,7 +10,15 @@ export default function Detail() {
     fetch("https://justivo.com/stockws.php?get&code=BST" + params.code)
     .then(response=> response.json())
     .then(dataReceived => setStock(dataReceived));
-  }, [])
+  }, [params.code])
+
+  function toggleFavorite(){
+    setStock(prevState => ({
+      ...prevState,
+      isFavorite: !prevState.isFavorite
+    }));
+  }
+  
   return (
     <>
     {stock &&(
@@ -19,6 +27,12 @@ export default function Detail() {
         <h3>{stock.code}</h3>
         <div>
           Preço: {stock.price}€
+        </div>
+        <div>
+          <button onClick={toggleFavorite}>
+            {stock.isFavorite ? "Remover " : "Marcar "}
+            Favorito
+          </button>
         </div>
       </section>
     )}
