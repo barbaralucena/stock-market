@@ -7,18 +7,28 @@ export default function Create() {
     price: 0
   })
   function handleChange(event) {
-    console.log("handleChange:", event.target.value);
     const {name,value} = event.target;
     setFormData(prevState => ({
       ...prevState,
       [name]: value
-    }))
+    }));
   }
+  
   function handleSubmit(event) {
     event.preventDefault();
     console.log("submit");
 
+    fetch("https://justivo.com/stockws.php?add",{
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json)
+    .then(result => console.log(result));
   }
+
   return (
     <main>
         <form action="">
