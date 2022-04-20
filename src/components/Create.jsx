@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Create() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     code: "",
@@ -13,7 +15,7 @@ export default function Create() {
       [name]: value
     }));
   }
-  
+
   function handleSubmit(event) {
     event.preventDefault();
     console.log("submit");
@@ -25,13 +27,13 @@ export default function Create() {
       },
       body: JSON.stringify(formData)
     })
-    .then(response => response.json)
-    .then(result => console.log(result));
+    .then(response => response.json())
+    .then(result => navigate("/detail/" + result.code));
   }
 
   return (
     <main>
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <div>
             <label>
               nome

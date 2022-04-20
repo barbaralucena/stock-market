@@ -7,7 +7,7 @@ export default function Detail() {
   const params = useParams();
   const [stock, setStock] = useState();
   useEffect(() =>{
-    fetch("https://justivo.com/stockws.php?get&code=BST" + params.code)
+    fetch("https://justivo.com/stockws.php?get&code=" + params.code)
     .then(response=> response.json())
     .then(dataReceived => setStock(dataReceived));
   }, [params.code])
